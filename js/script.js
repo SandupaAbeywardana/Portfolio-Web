@@ -10,6 +10,7 @@ var typed = new Typed(".typing", {
 /* ===== Typing Animation End ===== */
 
 /* ===== Stat Counter Start ===== */
+// TODO: #7 Edit Stat Counters to work on section visible ref:https://www.jqueryscript.net/animation/animated-counter-when-visible.html
 
 function animate(obj, initVal, lastVal, duration) {
    let startTime = null;
