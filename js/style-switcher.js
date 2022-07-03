@@ -7,6 +7,7 @@ styleSwitcherToggle.addEventListener("click", () => {
 
 /* hide style - switcher on scroll */
 
+//TODO: #2 Hide Style Switcher On Scroll Not Working
 window.addEventListener("scroll", () => {
     if(document.querySelector(".style-switcher").classList.contains("open"))
     {
