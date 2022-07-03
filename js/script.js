@@ -136,7 +136,6 @@ const nav = document.querySelector(".nav"),
          }
       }
 
-      //TODO: #1 addBackSection not working on Hire-Me Button
       function addBackSection(num)
       {
          allSection[num].classList.add("back-section");
