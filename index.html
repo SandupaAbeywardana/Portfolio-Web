@@ -571,43 +571,42 @@
 						<h3 class="contact-title padd-15">Send Me An Email</h3>
 						<h4 class="contact-subtitle padd-15">I'M VERY RESPONSIVE TO MESSAGES</h4>
 						<!-- ===== Contact Form Start ===== -->
-						<!--TODO: #4 Contact form JS not written-->
 						<div class="row">
-							<div class="contact-form padd-15">
+							<form class="contact-form padd-15" action="https://formspree.io/f/xgedjwvp" method="POST" id="contactform">
 								<div class="row">
 									<div class="form-item col-6 padd-15">
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Name">
+											<input type="text" name="name" class="form-control" placeholder="Name">
 										</div>
 									</div>
 									<div class="form-item col-6 padd-15">
 										<div class="form-group">
-											<input type="email" class="form-control" placeholder="Email">
+											<input type="email" name="_replyto" class="form-control" placeholder="Email" required>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-item col-12 padd-15">
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Subject">
+											<input type="text" name = "subject" class="form-control" placeholder="Subject">
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-item col-12 padd-15">
 										<div class="form-group">
-											<textarea name="" class="form-control" id="" placeholder="Message"></textarea>
+											<textarea name="message" class="form-control" id="" placeholder="Message" required></textarea>
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<!--<div class="row">
 									<div class="form-item col-12 padd-15">
-										<div class="form-group">
-											<button type="submit" class="btn">Send Message</button>
-										</div>
+										<div class="form-group">-->
+											<input type="submit" class="btn" value="Send Message"></input>
+										<!--</div>
 									</div>
-								</div>
-							</div>
+								</div>-->
+							</form>
 						</div>
 						<!-- ===== Contact Form End ===== -->
 					</div>
@@ -642,6 +641,38 @@
 		<script src="js/script.js"></script>
 		<script src="js/style-switcher.js"></script>
 		<script src="https://kit.fontawesome.com/7685430852.js" crossorigin="anonymous"></script>
-		
+		<!-- === Contact Form Script === -->
+		<script>
+			var form = document.getElementById("contactform");
+			
+			async function handleSubmit(event) {
+			  event.preventDefault();
+			  var status = document.getElementById("my-form-status");
+			  var data = new FormData(event.target);
+			  fetch(event.target.action, {
+				method: form.method,
+				body: data,
+				headers: {
+					'Accept': 'application/json'
+				}
+			  }).then(response => {
+				if (response.ok) {
+				  alert("Thanks for your submission!");
+				  form.reset()
+				} else {
+				  response.json().then(data => {
+					if (Object.hasOwn(data, 'errors')) {
+					  status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+					} else {
+					  alert("Oops! There was a problem submitting your form");
+					}
+				  })
+				}
+			  }).catch(error => {
+				alert("Oops! There was a problem submitting your form");
+			  });
+			}
+			form.addEventListener("submit", handleSubmit)
+		</script>
 	</body>
 </html>
